@@ -1,0 +1,2 @@
+class PageControlType < ApplicationRecord
+end

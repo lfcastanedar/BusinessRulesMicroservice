@@ -1,0 +1,2 @@
+class HealthPromotingEntity < ApplicationRecord
+end

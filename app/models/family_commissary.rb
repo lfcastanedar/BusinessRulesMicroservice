@@ -1,0 +1,2 @@
+class FamilyCommissary < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class WorkFlowHistory < ApplicationRecord
+end

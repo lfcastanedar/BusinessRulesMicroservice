@@ -1,0 +1,27 @@
+es:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              too_short: "La contraseña es muy corta"
+              blank: "El la contraseña no puede estar vacia"
+            email:
+              taken: 'Ya existe una cuenta con este mismo correo'
+            current_password:
+              invalid: "Contraseña actual invalida"
+            password_confirmation:
+              confirmation: "Las contraseñas no coinciden"
+            last_name:
+              blank: "El apellido no puede estar vacio"
+            first_name:
+              blank: "El nombre no puede estar vacio"
+  errors:
+    messages:
+      required: "El campo %{attribute} es requerido"
+      blank: "El campo %{attribute} no puede estar vacio"
+      inclusion: "El campo %{attribute} no puede estar vacio"
+      greater_than: "El campo %{attribute} debe ser mayor que %{count}"
+      not_a_number: "Has ingresado un campo no numérico"
+      greater_than_or_equal_to: "El campo %{attribute} debe ser mayor o igual a %{count}"

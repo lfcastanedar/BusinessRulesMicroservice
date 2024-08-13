@@ -1,0 +1,2 @@
+class ModelPage < ApplicationRecord
+end
