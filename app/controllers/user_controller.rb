@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-    before_action :authenticate_user!, except: [:get_account]
+    #before_action :authenticate_user!, except: [:get_account]
     before_action :set_user, only: [:update_password, :sidebar]
 
     def get_all_user
@@ -10,7 +10,8 @@ class UserController < ApplicationController
             :last_name,
             :created_at,
             'roles.title AS role_title',
-            'family_commissaries.name AS family_commissary_name'
+            'family_commissaries.name AS family_commissary_name',
+            :enabled
 
         )
         render json: @users
@@ -94,6 +95,33 @@ class UserController < ApplicationController
             render json: @user.errors, status: :unprocessable_entity
         end
     end
+
+    def enable_user
+        @user = User.find(params[:user_id])
+        
+
+        result = {
+            success: false,
+            message: ''
+        }
+
+        if @user.documents.count > 0 && @user.enabled == true && params[:enabled] == false
+            result[:message] = "No puedes #{ enable_user_title(params[:enabled]) } a #{ @user.fullname } porque tiene #{@user.documents.count} denuncia(s) por realizar"
+            render json: result
+
+            return
+        end
+
+        @user.enabled = params[:enabled]
+
+        if @user.save
+            result[:message] = "El usuario #{ @user.fullname } ha sido #{ enable_user_title_2(params[:enabled]) }"
+            result[:success] = true
+            render json: result
+        else
+            render json: @user.errors, status: :unprocessable_entity
+        end
+    end
     
     private
         def set_user
@@ -107,4 +135,12 @@ class UserController < ApplicationController
         def user_params
             params.require(:user).permit(:password, :password_confirmation, :current_password,)
         end
+
+        def enable_user_title(status)
+            status ? 'activar' : 'inactivar'
+        end     
+        
+        def enable_user_title_2(status)
+            status ? 'activado' : 'inactivado'
+        end     
 end
