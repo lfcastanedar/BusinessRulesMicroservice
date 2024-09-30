@@ -35,7 +35,16 @@ class FamilyCommissariesController < ApplicationController
 
   # DELETE /family_commissaries/1
   def destroy
-    @family_commissary.destroy
+    if @family_commissary.users.count > 0
+      render json: {
+        result: false
+      }
+    else
+      @family_commissary.destroy
+      render json: {
+        result: true
+      }
+    end
   end
 
   private

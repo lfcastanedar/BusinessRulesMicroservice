@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_29_034454) do
+ActiveRecord::Schema.define(version: 2024_09_29_235050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(version: 2024_03_29_034454) do
     t.string "jti"
     t.uuid "role_id"
     t.uuid "family_commissary_id"
+    t.boolean "enabled"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["family_commissary_id"], name: "index_users_on_family_commissary_id"
     t.index ["jti"], name: "index_users_on_jti", unique: true

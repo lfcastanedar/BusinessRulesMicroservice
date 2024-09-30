@@ -74,6 +74,7 @@ Rails.application.routes.draw do
       get 'get_account', to: 'user#get_account'
       put 'edit_profile/:user_id', to: 'user#edit_profile'
       post 'update_password', to: 'user#update_password'
+      put 'enable_user', to: 'user#enable_user'
     end
   end
 

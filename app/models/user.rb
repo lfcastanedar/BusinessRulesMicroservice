@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   include Devise::JWT::RevocationStrategies::JTIMatcher
 
   devise  :database_authenticatable, :registerable,
@@ -10,12 +8,17 @@ class User < ApplicationRecord
 
   belongs_to :role
   belongs_to :family_commissary
+  has_many :documents
   
   validates :first_name, presence: true
   validates :last_name, presence: true
 
   def get_fullname
     self.first_name + " " + self.last_name
+  end
+
+  def fullname
+    "#{first_name} #{last_name}"
   end
   
   def get_sidebar
